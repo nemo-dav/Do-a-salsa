@@ -1481,7 +1481,7 @@ function actualizarStockCliente(stock){
             let estado = "";
             let clase = "";
 
-            if(cantidad <= 5){
+            if(cantidad <= 0){
 
                 estado = "⚫ SIN STOCK";
                 clase = "negro";
@@ -1493,9 +1493,9 @@ function actualizarStockCliente(stock){
                     boton.innerText = "SIN STOCK";
                 });
 
-            }else if(cantidad <= 6){
+            }else if(cantidad <= 10){
 
-                estado = "🟡 MEDIA DOCENA SOLAMENTE";
+                estado = "🟡 POCO STOCK";
                 clase = "amarillo";
 
             }else{
