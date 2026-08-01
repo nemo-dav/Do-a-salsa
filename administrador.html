@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+ 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>USUARIO-ADMINISTRADOR</title>
+
+<style>
+
+/* ================= BASE ================= */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+background:#121212;
+color:white;
+padding:25px;
+transition:0.3s;
+}
+
+h1{
+text-align:center;
+font-size:80px;
+margin-top: 35px;
+margin: 30px 0 10px 0;
+margin-bottom:30px 0 10px 0;
+color:#ffcc00;
+text-shadow:0 0 20px rgba(255,204,0,0.7);
+}
+
+/* ================= MODO CLARO ================= */
+
+body.light{
+background:#f5f5f5;
+color:#111;
+}
+
+body.light .card{
+background:#ffffff;
+color:#111;
+}
+
+body.light .precio{
+background:#111;
+color:#fff;
+}
+
+body.light #carritoBox{
+background:#ffffff;
+color:#111;
+}
+
+body.light li{
+background:#eaeaea;
+color:#111;
+}
+
+/* ================= TOP BAR ================= */
+
+.topbar{
+display:flex;
+justify-content:space-between;
+margin-bottom:15px;
+}
+
+.controlBtn{
+background:linear-gradient(145deg,#2a2a2a,#1a1a1a);
+color:white;
+padding:10px 16px;
+border:none;
+border-radius:12px;
+cursor:pointer;
+margin-right:10px;
+transition:0.2s;
+box-shadow:0 5px 10px rgba(0,0,0,0.4);
+}
+
+.controlBtn:hover{
+transform:scale(1.05);
+}
+
+/* ================= MENU BOTONES ================= */
+
+.menuBotones{
+    margin-top:56px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+    margin-bottom:40px;
+}
+  
+
+
+.controlBtn{
+  display: block;
+  width: 100%;
+  padding: 18px;
+  background: linear-gradient(135deg, #000000, #ffcc00);
+  color: #fff;
+  text-align: center;
+  border-radius: 14px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: 0.2s ease;    
+}
+
+.controlBtn:hover{
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+/* ================= PRODUCTOS ================= */
+
+.contenedor{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:25px;
+}
+
+.card{
+background:#1f1f1f;
+border-radius:30px;
+overflow:hidden;
+box-shadow:0 10px 30px rgba(0,0,0,0.5);
+transition:0.4s;
+border:1px solid rgba(255,255,255,0.05);
+backdrop-filter:blur(5px);
+}
+
+.card:hover{
+transform:translateY(-10px);
+}
+
+.card img{
+width:100%;
+height:250px;
+object-fit:cover;
+}
+
+.info{
+padding:25px;
+}
+
+.titulo{
+font-size:35px;
+font-weight:bold;
+margin-bottom:20px;
+}
+
+.precio{
+display:inline-block;
+background:#fff;
+color:#000;
+padding:12px 20px;
+border-radius:15px;
+font-size:28px;
+font-weight:bold;
+margin-bottom:20px;
+}
+
+button{
+width:100%;
+padding:16px;
+border:none;
+border-radius:18px;
+cursor:pointer;
+font-size:20px;
+font-weight:bold;
+}
+
+.comprar{
+background:#00c853;
+color:white;
+}
+
+.comprar:hover{
+background:#00e676;
+}
+
+/* ================= CARRITO ================= */
+
+#carritoBox{
+margin-top:50px;
+background:#1c1c1c;
+border-radius:30px;
+padding:30px;
+}
+
+#total{
+color:#00e676;
+font-size:40px;
+font-weight:bold;
+}
+
+ul{
+list-style:none;
+}
+
+li{
+background:#2b2b2b;
+padding:18px;
+border-radius:18px;
+margin-bottom:15px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.eliminar{
+background:red;
+color:white;
+border:none;
+padding:8px 12px;
+border-radius:8px;
+}
+
+/* ================= DATOS ================= */
+
+.datos{
+margin-top:40px;
+}
+
+input{
+width:100%;
+padding:15px;
+margin-bottom:10px;
+border-radius:10px;
+border:none;
+}
+
+/* ================= MENSAJE ================= */
+
+#mensaje{
+position:fixed;
+bottom:20px;
+left:50%;
+transform:translateX(-50%);
+background:#00c853;
+padding:12px 20px;
+border-radius:12px;
+display:none;
+}
+
+/* ================= MARCA ================= */ 
+
+.marca{
+text-align: center;
+margin-top: 20px;
+font-size: 16;
+color: #bdbdbd;
+margin-bottom: 15px;
+letter-spacing: 1;
+}
+
+.marca strong{
+color:#ffcc00;
+}
+
+/* ================= CONTACTO ================= */ 
+
+.novara-mini{
+display:flex;
+justify-content:center;
+gap:20px;
+margin-bottom:10px;
+font-size:12px;
+}
+
+.mini-link{
+display:flex;
+align-items:center;
+gap:6px;
+text-decoration:none;
+color:#bbb;
+transition:0.2s;
+}
+
+.mini-link:hover{
+color:white;
+transform:scale(1.05);
+}
+
+.mini-icon{
+width:16px;
+height:16px;
+}
+
+/* ================= REDES SOCIALES ================= */ 
+
+.gmail-link{
+display:flex;
+align-items:center;
+gap:8px;
+text-decoration:none;
+}
+
+.mail-text{
+display:flex;
+flex-direction:column;
+line-height:1.1;
+}
+
+.mail-text span{
+color:#ffffff;
+font-size:13px;
+font-weight:500;
+}
+
+.mail-text small{
+color:#aaa;
+font-size:11px;
+}
+
+.whatsapp-link{
+display:flex;
+align-items:center;
+gap:8px;
+text-decoration:none;
+}
+
+.wa-text{
+display:flex;
+flex-direction:column;
+line-height:1.1;
+}
+
+.wa-text span{
+color:#00ff00;
+font-size:13px;
+font-weight:500;
+}
+
+.wa-text small{
+color:#aaaaaa;
+font-size:11px;
+}
+
+/* ================= BANNER ================= */ 
+
+.banner-pedido{
+    margin-top: 0px;
+    text-align: center;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+
+.banner-pedido h2,
+.banner-pedido p{
+    width:100%;
+    text-align:center;
+}
+
+
+.banner-pedido p{
+    margin-top:10px;
+    font-size:18px;
+    color:#f8f408;
+    text-align:center;
+}
+
+
+/* =================FONDO ================= */ 
+
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+
+background:
+
+linear-gradient(
+rgba(0,0,0,0.75),
+rgba(0,0,0,0.75)
+),
+
+url("imagenes/FONDO/BCO.5ffd8c5d-83b1-48f9-a940-9dc6aa4cc03b.png");
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
+color:white;
+padding:25px;
+transition:0.3s;
+min-height: 100vh;
+overflow-x: hidden;
+
+} 
+
+/* ================= FORMATO CELULAR ================= */
+
+@media (max-width:600px){
+
+/* ===== BASE ===== */
+
+body{
+    padding:15px;
+    padding-top:5px;
+    background-attachment:scroll;
+}
+
+
+/* ===== TITULO ===== */
+
+h1{
+    font-size:48px;
+    margin:20px 0 15px 0;
+    text-align:center;
+}
+
+
+/* ===== MARCA ===== */
+
+.marca{
+    margin-top:0;
+    margin-bottom:8px;
+    font-size:14px;
+    text-align:center;
+}
+
+.novara-mini{
+    flex-direction:column;
+    align-items:center;
+    gap:8px;
+    margin-bottom:35px;
+}
+
+.gmail-link img,
+.whatsapp-link img{
+    width:20px;
+    height:20px;
+}
+
+.mail-text span,
+.wa-text span{
+    font-size:11px;
+}
+
+.mail-text small,
+.wa-text small{
+    font-size:9px;
+}
+
+
+/* ===== BANNER ===== */
+
+.banner-pedido{
+    margin-top:30px;
+}
+
+
+.banner-pedido h2{
+    font-size:28px;
+}
+
+
+.banner-pedido p{
+    font-size:16px;
+}
+
+
+/* ===== BOTONES MENU ===== */
+
+.menuBotones{
+
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+    margin-top:35px;
+
+}
+
+
+.controlBtn{
+
+    font-size:16px;
+    padding:15px 8px;
+    border-radius:14px;
+
+}
+
+
+/* ===== PRODUCTOS ===== */
+
+.contenedor{
+
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+
+}
+
+
+.card{
+
+    border-radius:18px;
+
+}
+
+
+.card img{
+
+    height:130px;
+
+}
+
+
+.info{
+
+    padding:12px;
+
+}
+
+
+.titulo{
+
+    font-size:18px;
+    margin-bottom:10px;
+
+}
+
+
+.precio{
+
+    font-size:16px;
+    padding:8px 10px;
+    margin-bottom:12px;
+
+}
+
+
+.comprar{
+
+    font-size:15px;
+    padding:12px 5px;
+
+}
+
+
+/* ===== DATOS ===== */
+
+.datos{
+
+    margin-top:25px;
+
+}
+
+
+input{
+
+    padding:14px;
+    font-size:16px;
+
+}
+
+
+/* ===== CARRITO ===== */
+
+#carritoBox{
+
+    margin-top:30px;
+    padding:20px;
+    border-radius:20px;
+
+}
+
+
+#total{
+
+    font-size:30px;
+
+}
+
+
+li{
+
+    padding:14px;
+    font-size:14px;
+
+}
+
+
+.eliminar{
+
+    padding:8px 10px;
+
+}
+
+
+/* ===== MENSAJE ===== */
+
+#mensaje{
+
+    width:90%;
+    text-align:center;
+
+}
+
+}
+
+.stock-card{
+
+background:rgba(30,30,30,.75);
+padding:25px;
+margin:20px 0;
+border-radius:22px;
+border:1px solid rgba(255,255,255,.08);
+backdrop-filter:blur(8px);
+box-shadow:0 12px 30px rgba(0,0,0,.45);
+transition:.3s;
+
+}
+
+.stock-card:hover{
+
+transform:translateY(-5px);
+
+}
+
+
+
+
+.stock-card h2{
+
+color:#ffcc00;
+margin-bottom:15px;
+
+}
+
+
+.stock-control{
+
+display:flex;
+align-items:center;
+justify-content:center;
+gap:20px;
+margin:15px 0;
+
+}
+
+
+.stock-control button{
+
+
+width:55px;
+height:55px;
+border-radius:50%;
+font-size:28px;
+background:linear-gradient(135deg,#ffcc00,#ff9800);
+color:black;
+font-weight:bold;
+
+}
+
+
+
+
+.cantidad{
+
+font-size:42px;
+font-weight:bold;
+min-width:60px;
+text-align:center;
+
+}
+
+
+
+
+.estado-stock{
+
+font-size:20px;
+font-weight:bold;
+text-align:center; 
+
+}
+
+.estado-verde{
+    color:#00e676;
+}
+
+.estado-amarillo{
+    color:#ffcc00;
+}
+
+.estado-rojo{
+    color:#ff1744;
+}
+
+.estado-negro{
+    color:white;
+    background:#000;
+    padding:8px 15px;
+    border-radius:10px;
+}
+
+
+.estadisticas{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:20px;
+margin-bottom:30px;
+
+}
+
+.estadistica{
+
+background:rgba(25,25,25,.8);
+backdrop-filter:blur(10px);
+padding:25px;
+border-radius:20px;
+text-align:center;
+border:1px solid rgba(255,255,255,.08);
+
+}
+
+.estadistica h3{
+
+color:#ffcc00;
+margin-bottom:10px;
+
+}
+
+.estadistica p{
+
+font-size:35px;
+font-weight:bold;
+
+}
+
+#buscador{
+
+width:100%;
+padding:16px;
+border-radius:15px;
+border:none;
+font-size:18px;
+margin-bottom:35px;
+background:#222;
+color:white;
+
+}
+
+
+
+</style>
+
+</head>
+
+<body>
+
+<!-- ================= CONTACTO ================= -->
+ 
+<div class="marca">
+Powered BY <strong>Barrios Nehemias</strong>
+</div>
+
+<div class="novara-mini">
+
+<a class="gmail-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=novara.sofware@gmail.com&su=Consulta%20La%20Turquesa">
+  <img src="imagenes/Redes sociales/gmail.png" width="25">
+  <div class="mail-text">
+    <span>Gmail</span>
+    <small>Contacto</small>
+  </div>
+</a>
+
+
+<a class="whatsapp-link" href="https://wa.me/5493471599940?text=Hola%20Novara%2C%20quiero%20hablar%20sobre%20La%20Turquesa">
+  <img src="imagenes/Redes sociales/whatsapp.png" width="25">
+  <div class="wa-text">
+    <span>WhatsApp</span>
+    <small>Soporte Tecnico</small>
+  </div>
+</a>
+
+</div>
+
+</div>
+
+<!-- ================= TITULO ================= -->
+
+
+<div class="menuBotones">
+
+  <a href="index.html" class="controlBtn">INICIO</a>
+  <a href="Cliente.html" class="controlBtn">CLIENTES</a>
+
+</div>
+
+
+<h1>CONTROL DE STOCK</h1>
+
+</div>
+
+</div>
+
+
+<div id="panel-stock"></div>
+
+<button class="controlBtn"
+onclick="reiniciarStock()">
+REINICIAR STOCK
+</button>
+
+
+<script src="administrador.js"></script>
+
+
+</script>
+
+<script src="http://localhost:3000/socket.io/socket.io.js"></script>
+
+<script>
+
+// ================= SOCKET.IO STOCK EN TIEMPO REAL =================
+
+const socket = io("http://localhost:3000");
+
+
+socket.on("actualizarStock", (stock) => {
+
+    console.log("Stock recibido del servidor:", stock);
+
+    actualizarStockCliente(stock);
+
+});
+
+
+// ================= MOSTRAR STOCK =================
+
+function actualizarStockCliente(stock){
+
+
+    document.querySelectorAll(".card").forEach(card=>{
+
+
+        let categoria = card.dataset.categoria;
+        let producto = card.dataset.producto;
+
+
+        // borrar estado anterior
+
+        let viejo = card.querySelector(".estado-stock");
+
+        if(viejo){
+            viejo.remove();
+        }
+
+
+
+        if(stock[categoria] && stock[categoria][producto]){
+
+
+            let cantidad = stock[categoria][producto].stock;
+
+
+            let estado = "";
+            let clase = "";
+
+
+
+            if(cantidad <= 0){
+
+                estado = "⚫ SIN STOCK";
+                clase = "negro";
+
+
+                let botones = card.querySelectorAll(".comprar");
+
+                botones.forEach(boton=>{
+
+                    boton.disabled = true;
+                    boton.innerText = "SIN STOCK";
+
+                });
+
+
+
+            }else if(cantidad <= 5){
+
+
+                estado = "🟡 POCO STOCK";
+                clase = "amarillo";
+
+
+
+            }else{
+
+
+                estado = "🟢 DISPONIBLE";
+                clase = "verde";
+
+
+            }
+
+
+
+            let div = document.createElement("div");
+
+            div.className = "estado-stock " + clase;
+
+            div.innerHTML = estado;
+
+
+            card.querySelector(".info").appendChild(div);
+
+
+        }
+
+
+    });
+
+
+}
+
+</script>
+
+</body>
+</html>
+
+</body>
+</html>
+
+
+</body>
+</html>
+

@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Doña salsa -SUPREMA</title>
+
+<style>
+
+/* ================= BASE ================= */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+
+background:
+
+linear-gradient(
+rgba(0,0,0,0.7),
+rgba(0,0,0,0.7)
+),
+
+url("imagenes/FONDO/BCO.5ffd8c5d-83b1-48f9-a940-9dc6aa4cc03b.png");
+
+background-size:cover;
+
+background-position:center;
+
+background-attachment:fixed;
+
+color:white;
+
+padding:25px;
+
+transition:0.3s;
+
+}
+
+/* ================= TITULO ================= */
+
+h1{
+text-align:center;
+font-size:65px;
+margin-bottom:10px;
+color:#ffcc00;
+text-shadow:0 0 20px rgba(255,204,0,0.7);
+}
+
+.subtitulo{
+
+text-align:center;
+
+font-size:22px;
+
+margin-bottom:35px;
+
+color:#ffffffcc;
+
+font-style:italic;
+
+letter-spacing:2px;
+
+text-shadow:0 0 10px rgba(0,0,0,0.5);
+
+}
+
+/* ================= MODO CLARO ================= */
+
+body.light{
+
+background:
+
+linear-gradient(
+rgba(255,255,255,0.6),
+rgba(255,255,255,0.6)
+),
+
+url("imagenes/PIZZA/fondo\ de\ pizza.jpg");
+
+background-size:cover;
+
+background-position:center;
+
+background-attachment:fixed;
+
+color:#111;
+
+}
+
+body.light .card{
+background:#ffffff;
+color:#111;
+}
+
+body.light .precio{
+background:#111;
+color:#fff;
+}
+
+body.light #carritoBox{
+background:#ffffff;
+color:#111;
+}
+
+body.light li{
+background:#eaeaea;
+color:#111;
+}
+
+body.light .subtitulo{
+color:#111;
+}
+
+/* ================= TOP BAR ================= */
+
+.topbar{
+display:flex;
+justify-content:space-between;
+margin-bottom:15px;
+}
+
+.controlBtn{
+background:linear-gradient(145deg,#2a2a2a,#1a1a1a);
+color:white;
+padding:10px 16px;
+border:none;
+border-radius:12px;
+cursor:pointer;
+margin-right:10px;
+transition:0.2s;
+box-shadow:0 5px 10px rgba(0,0,0,0.4);
+font-size:20px;
+font-weight:bold;
+}
+
+.controlBtn:hover{
+transform:scale(1.05);
+}
+
+/* ================= BOTONES MENU ================= */
+
+.menuCategorias{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+margin-bottom:40px;
+}
+
+
+
+.menuBtn{
+background:linear-gradient(145deg,#000000,#ffcc00);
+color:white;
+padding:10px 16px;
+border:none;
+border-radius:12px;
+cursor:pointer;
+transition:0.2s;box-shadow:0 5px 10px rgba(0,0,0,0.4);
+font-size:20px;
+font-weight:bold;
+width:100%;
+
+}
+
+.menuBtn:hover{
+
+transform:scale(1.05);
+
+}
+
+/* ================= PRODUCTOS ================= */
+
+.contenedor{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:25px;
+}
+
+.card{
+background:#1f1f1f;
+border-radius:30px;
+overflow:hidden;
+box-shadow:0 10px 30px rgba(0,0,0,0.5);
+transition:0.4s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+}
+
+.card img{
+width:100%;
+height:250px;
+object-fit:cover;
+display:block;
+}
+
+.info{
+padding:25px;
+}
+
+.titulo{
+font-size:35px;
+font-weight:bold;
+margin-bottom:20px;
+}
+
+.precio{
+display:inline-block;
+background:#fff;
+color:#000;
+padding:12px 20px;
+border-radius:15px;
+font-size:28px;
+font-weight:bold;
+margin-bottom:20px;
+}
+
+button{
+width:100%;
+padding:16px;
+border:none;
+border-radius:18px;
+cursor:pointer;
+font-size:20px;
+font-weight:bold;
+}
+
+.comprar{
+background:#00c853;
+color:white;
+margin-bottom:20px;
+}
+
+.comprar:hover{
+background:#00e676;
+}
+
+/* ================= CARRITO ================= */
+
+#carritoBox{
+margin-top:50px;
+background:#1c1c1c;
+border-radius:30px;
+padding:30px;
+}
+
+#total{
+color:#00e676;
+font-size:40px;
+font-weight:bold;
+}
+
+ul{
+list-style:none;
+}
+
+li{
+background:#2b2b2b;
+padding:18px;
+border-radius:18px;
+margin-bottom:15px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.eliminar{
+background:red;
+color:white;
+border:none;
+padding:8px 12px;
+border-radius:8px;
+}
+
+/* ================= DATOS ================= */
+
+.datos{
+margin-top:40px;
+}
+
+input{
+width:100%;
+padding:15px;
+margin-bottom:10px;
+border-radius:10px;
+border:none;
+}
+
+/* ================= MENSAJE ================= */
+
+#mensaje{
+position:fixed;
+bottom:20px;
+left:50%;
+transform:translateX(-50%);
+background:#00c853;
+padding:12px 20px;
+border-radius:12px;
+display:none;
+}
+
+/* ================= EFECTOS ================= */
+
+.moneda,.plus{
+position:fixed;
+pointer-events:none;
+animation:subir 1s ease-out forwards;
+z-index:9999;
+}
+
+.moneda{
+font-size:28px;
+}
+
+.plus{
+color:#00e676;
+font-weight:bold;
+}
+
+@keyframes subir{
+
+0%{
+opacity:1;
+transform:translateY(0);
+}
+
+100%{
+opacity:0;
+transform:translateY(-120px);
+}
+
+}
+
+/* ================= MARCA ================= */ 
+
+.marca{
+text-align: center;
+font-size: 16;
+color: #bdbdbd;
+margin-bottom: 15px;
+letter-spacing: 1;
+}
+
+.marca strong{
+color:#ffcc00;
+}
+
+/* ================= CONTACTO ================= */ 
+
+.novara-mini{
+display:flex;
+justify-content:center;
+gap:15px;
+margin-bottom:10px;
+font-size:12px;
+}
+
+.mini-link{
+display:flex;
+align-items:center;
+gap:6px;
+text-decoration:none;
+color:#bbb;
+transition:0.2s;
+}
+
+.mini-link:hover{
+color:white;
+transform:scale(1.05);
+}
+
+.mini-icon{
+width:16px;
+height:16px;
+}
+
+/* ================= REDES SOCIALES ================= */ 
+
+.gmail-link{
+display:flex;
+align-items:center;
+gap:8px;
+text-decoration:none;
+}
+
+.mail-text{
+display:flex;
+flex-direction:column;
+line-height:1.1;
+}
+
+.mail-text span{
+color:#ffffff;
+font-size:13px;
+font-weight:500;
+}
+
+.mail-text small{
+color:#aaa;
+font-size:11px;
+}
+
+.whatsapp-link{
+display:flex;
+align-items:center;
+gap:8px;
+text-decoration:none;
+}
+
+.wa-text{
+display:flex;
+flex-direction:column;
+line-height:1.1;
+}
+
+.wa-text span{
+color:#00ff00;
+font-size:13px;
+font-weight:500;
+}
+
+.wa-text small{
+color:#aaaaaa;
+font-size:11px;
+}
+
+/* ================= CONTACTO CELULAR ================= */
+
+@media (max-width:600px){
+
+.novara-mini{
+    flex-direction:column;
+    align-items:center;
+    gap:12px;
+}
+
+}
+
+
+/* ================= CELULAR ================= */
+
+@media (max-width:600px){
+
+body{
+padding:15px;
+padding-top: 5px;
+background-attachment:scroll;
+background-size:cover;
+background-position:center;
+min-height: 100vh;
+}
+
+
+/* TITULO */
+
+h1{
+    font-size:40px;
+}
+
+/* ================= REDES SOCIALES ================= */
+
+.novara-mini{
+    flex-direction:column;
+    align-items:center;
+    gap:12px;
+}
+
+.marca{
+    font-size: 14px;
+    margin-top:0;
+    margin-bottom:8px;
+}
+
+.novara-mini{
+    gap: 8px;
+    margin-bottom:35px;
+}
+
+.gmail-link img,
+.whatsapp-link img{
+    width:20px;
+    height:20px;
+}
+
+.mail-text span,
+.wa-text span{
+    font-size:11px;
+}
+
+.mail-text small,
+.wa-text small{
+    font-size:9px;
+}
+
+/* BOTONES CATEGORIAS */
+
+.menuCategorias{
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+}
+
+
+.menuBtn{
+    font-size:15px;
+    padding:14px 5px;
+}
+
+
+/* PRODUCTOS 2 EN 2 */
+
+.contenedor{
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+
+.card{
+    border-radius:18px;
+}
+
+
+.card img{
+    height:120px;
+}
+
+
+.info{
+    padding:10px;
+}
+
+
+.titulo{
+    font-size:16px;
+}
+
+
+.precio{
+    font-size:14px;
+    padding:8px;
+}
+
+
+.comprar{
+    font-size:14px;
+    padding:10px 3px;
+}
+
+}
+
+/* ================= ESTADO STOCK ================= */
+
+.estado-stock{
+    text-align:center;
+    font-size:18px;
+    font-weight:bold;
+    margin-top:15px;
+    padding:10px;
+    border-radius:12px;
+}
+
+
+/* VERDE */
+.disponible{
+    color:#00ff00;
+}
+
+
+/* AMARILLO */
+.poco{
+    color:#ffcc00;
+}
+
+
+/* ROJO */
+.ultima{
+    color:red;
+}
+
+
+/* NEGRO SIN STOCK */
+.sin-stock{
+    background:black;
+    color:white;
+}
+
+
+/* FOTO OSCURA SIN STOCK */
+.card.sin-stock img{
+    filter:brightness(0);
+}
+
+/* ================= STOCK CLIENTE ================= */
+
+.estado-stock{
+    text-align:center;
+    font-size:18px;
+    font-weight:bold;
+    margin-top:15px;
+    padding:10px;
+    border-radius:12px;
+}
+
+
+/* VERDE */
+.estado-stock.verde{
+    color:#00ff00;
+}
+
+
+/* AMARILLO */
+.estado-stock.amarillo{
+    color:#ffcc00;
+}
+
+
+/* ROJO */
+.estado-stock.rojo{
+    color:red;
+}
+
+
+/* NEGRO SIN STOCK */
+.card.sin-stock{
+    background:#050505;
+}
+
+
+.card.sin-stock img{
+    filter:grayscale(100%) brightness(20%);
+}
+
+
+.estado-stock.negro{
+    background:black;
+    color:white;
+    padding:10px;
+    border-radius:12px;
+}
+
+.boton-sin-stock{
+
+width:100%;
+padding:16px;
+background:#000;
+color:white;
+text-align:center;
+border-radius:18px;
+font-size:20px;
+font-weight:bold;
+
+}
+
+
+.card.sin-stock img{
+
+filter:grayscale(100%) brightness(20%);
+
+}
+
+
+.card.sin-stock{
+
+background:#050505;
+
+} 
+
+.boton-sin-stock{
+    background:black !important;
+    color:white;
+    cursor:not-allowed;
+}
+
+.boton-sin-stock:hover{
+    background:black !important;
+}
+
+select{
+    width:100%;
+    padding:15px;
+    margin-bottom:10px;
+    border-radius:10px;
+    border:none;
+    font-size:16px;
+}
+
+/* ================= VERIFICAR DIRECCION ================= */
+
+.verificar-btn{
+
+width:100%;
+padding:16px;
+
+background:linear-gradient(145deg,#ffcc00,#ff9900);
+
+color:#111;
+
+border:none;
+border-radius:18px;
+
+font-size:20px;
+font-weight:bold;
+
+cursor:pointer;
+
+box-shadow:0 8px 15px rgba(0,0,0,0.4);
+
+transition:0.3s;
+
+margin-bottom:15px;
+
+}
+
+
+.verificar-btn:hover{
+
+transform:scale(1.05);
+
+background:#ffd633;
+
+}
+
+#estadoZona{
+
+background:#1c1c1c;
+padding:15px;
+border-radius:15px;
+text-align:center;
+font-size:18px;
+font-weight:bold;
+margin-bottom:15px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- ================= CONTACTO ================= -->
+ 
+<div class="marca">
+Powered BY <strong>Barrios Nehemias</strong>
+</div>
+
+<div class="novara-mini">
+
+<a class="gmail-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=novara.sofware@gmail.com&su=Consulta%20La%20Turquesa">
+  <img src="imagenes/Redes sociales/gmail.png" width="25">
+  <div class="mail-text">
+    <span>Gmail</span>
+    <small>Contacto</small>
+  </div>
+</a>
+
+<a class="whatsapp-link" href="https://wa.me/5493471599940?text=Hola%20Novara%2C%20quiero%20hablar%20sobre%20La%20Turquesa">
+  <img src="imagenes/Redes sociales/whatsapp.png" width="25">
+  <div class="wa-text">
+    <span>WhatsApp</span>
+    <small>Soporte Tecnico</small>
+  </div>
+</a>
+
+</div>
+
+</div>
+
+
+
+<!-- ================= TITULO ================= -->
+
+<h1>🍕 SUPREMAS</h1>
+
+<p class="subtitulo">
+    
+</p>
+
+<!-- ================= BOTONES ================= -->
+
+<div class="menuCategorias">
+
+<a href="Cliente.html">
+<button class="menuBtn">
+ VOLVER
+</button>
+</a>
+
+<a href="empanadas.html">
+<button class="menuBtn">
+ EMPANADAS
+</button>
+</a>
+
+<a href="torpedos.html">
+<button class="menuBtn">
+ TORPEDOS
+</button>
+</a>
+
+
+<a href="index.html">
+<button class="menuBtn">
+ INICIO
+</button>
+</a>
+
+<a href="pizzas.html">
+<button class="menuBtn">
+  PIZZAS
+</button>
+</a> 
+
+<a href="promo.html">
+<button class="menuBtn">
+  PROMOS
+</button>
+</a>
+
+
+</div>
+
+<!-- ================= PRODUCTOS ================= -->
+
+<div class="contenedor">
+
+<div class="card"
+data-categoria="suprema"
+data-producto="suprema">
+
+<img src="imagenes/SUPREMA/images (1).jpg">
+
+<div class="info">
+
+<div class="titulo">
+SUPREMA XL
+</div>
+
+<div class="precio">
+X2 $15.000 
+</div>
+
+<button
+class="comprar"
+onclick="agregar(this,'SUPREMA XL(2)',15000,2,'suprema')">
+COMPRAR
+</button>
+
+<div class="precio">
+X4 $25.000
+</div>
+
+<button
+class="comprar"
+onclick="agregar(this,'SUPREMA xl(4)',25000,4,'suprema')">
+COMPRAR
+</button>
+
+</div>
+</div>
+
+<div class="card"
+data-categoria="suprema"
+data-producto="pizanesa">
+
+<img src="imagenes/SUPREMA/milnap01-1024x772.jpg">
+
+<div class="info">
+
+<div class="titulo">
+PIZZANESA DE SUPREMA
+</div>
+
+<div class="precio">
+$25.000
+</div>
+
+<button
+class="comprar"
+onclick="agregar(this,'PIZZANESA DE SUPREMA',25000,1,'pizanesa')">
+COMPRAR
+</button>
+
+</div>
+</div>
+
+<div class="card"
+data-categoria="suprema"
+data-producto="napolitana">
+
+<img src="imagenes/SUPREMA/images.jpg">
+
+<div class="info">
+
+<div class="titulo">
+MILANESA DE SUPREMAS ALA NAPOLITANA + FRITA
+</div>
+
+<div class="precio">
+4X $19.000
+</div>
+
+<button
+class="comprar"
+onclick="agregar(this,'MILANESA DE SUPREMAS ALA NAPOLITANA + FRITA(X4)',19000,4,'napolitana')">
+COMPRAR
+</button>
+
+<div class="precio">
+2X $13.000
+</div>
+
+<button
+class="comprar"
+onclick="agregar(this,'MILANESA DE SUPREMAS ALA NAPOLITANA + FRITA(X2)',13000,2,'napolitana')">
+COMPRAR
+</button>
+
+<div class="precio">
+1X $8.000
+</div>
+
+<button
+class="comprar"
+onclick="agregar(this,'MILANESA DE SUPREMAS ALA NAPOLITANA + FRITA(X2)',8000,2,'napolitana')">
+COMPRAR
+</button>
+
+
+</div>
+</div>
+
+<div class="card"
+data-categoria="suprema"
+data-producto="milanesa">
+
+<img src="imagenes/SUPREMA/298620-260ef0eb-ee0d-42ea-862c-bdd453820db7-500x375-1.jpeg">
+
+<div class="info">
+
+<div class="titulo">
+MILANESA DE SUPREMA + PAPAS FRITAS
+</div>
+
+<div class="precio">
+4X $18.000
+</div>
+
+<button
+class="comprar"
+onclick="agregar(this,'MILANESA DE SUPREMA + PAPAS FRITAS(4)',18000,4,'milanesa')">COMPRAR</button>
+
+
+
+
+<div class="precio">
+2X $12.000
+</div>
+
+<button
+class="comprar"
+onclick="agregar(this,'MILANESA DE SUPREMA + PAPAS FRITAS(2)',12000,2,'milanesa')">COMPRAR</button>
+
+
+<div class="precio">
+1X $7.000
+</div>
+
+<button
+class="comprar"
+onclick="agregar(this,'MILANESA DE SUPREMA + PAPAS FRITAS(1)',7000,1,'milanesa')">COMPRAR</button>
+
+</div>
+</div>
+
+<div class="card"
+data-categoria="suprema"
+data-producto="milanesaNapolitana">
+
+<img src="imagenes/SUPREMA/images (2).jpg">
+
+<div class="info">
+
+<div class="titulo">
+MILANESA DE SUPREMA XL + FRITAS
+</div>
+
+<div class="precio">
+$15.000
+</div>
+
+<button
+class="comprar"
+onclick="agregar(this,'MILANESA DE SUPREMA XL + FRITAS',15000,1,'milanesaNapolitana')">
+COMPRAR
+</button>
+
+</div>
+</div>
+
+
+</div>
+</div>
+
+
+<!-- ================= DATOS ================= -->
+
+<input id="nombre" placeholder="Nombre">
+
+<input id="direccion" placeholder="Dirección y localidad Ej: Ocampo 450, Cañada de Gomez">
+
+<input id="telefono" placeholder="Teléfono">
+
+<select id="pago">
+    <option value="">Forma de pago</option>
+    <option value="Efectivo">💵 Efectivo</option>
+    <option value="Transferencia">🏦 Transferencia</option>
+</select>
+
+<div id="estadoZona">
+🚚 Verificaremos automáticamente si llegamos a tu domicilio
+</div>
+
+<!-- ================= CARRITO ================= -->
+
+<div id="carritoBox">
+
+<h2>🛒 CARRITO</h2>
+
+<ul id="carrito"></ul>
+
+<h2>
+TOTAL: $
+<span id="total">0</span>
+</h2>
+
+<button
+class="controlBtn"
+onclick="enviar()">
+PEDIR POR WHATSAPP
+</button>
+
+</div>
+
+<div id="mensaje">
+✔ Pedido enviado
+</div>
+
+<!-- ================= AUDIO ================= -->
+
+<audio id="player"></audio>
+
+<audio
+id="clickSound"
+src="sonidos/dinero.mp3">
+</audio>
+
+<script>
+
+
+/* ================= EFECTOS ================= */
+
+function efecto(btn,precio){
+
+let r = btn.getBoundingClientRect();
+
+let x = r.left + r.width/2;
+
+let y = r.top;
+
+let m = document.createElement("div");
+
+m.className = "moneda";
+
+m.innerText = "💰";
+
+m.style.left = x+"px";
+
+m.style.top = y+"px";
+
+document.body.appendChild(m);
+
+setTimeout(()=>m.remove(),1000);
+
+let p = document.createElement("div");
+
+p.className = "plus";
+
+p.innerText = "+$"+precio;
+
+p.style.left = x+"px";
+
+p.style.top = y+"px";
+
+document.body.appendChild(p);
+
+setTimeout(()=>p.remove(),1000);
+
+}
+
+/* ================= CLICK SOUND ================= */
+
+const clickSound =
+document.getElementById("clickSound");
+
+document.addEventListener("click",(e)=>{
+
+if(e.target.classList.contains("comprar")){
+
+clickSound.currentTime = 0;
+
+clickSound.play();
+
+}
+
+});
+
+/* ================= BASE DE DATOS ================= */
+
+let carrito =
+JSON.parse(localStorage.getItem("carrito")) || [];
+
+let pedidos =
+JSON.parse(localStorage.getItem("pedidos")) || [];
+
+let clientes =
+JSON.parse(localStorage.getItem("clientes")) || [];
+
+/* ================= CARRITO ================= */
+
+async function agregar(btn, prod, precio, cantidad, producto){
+
+    const respuesta = await fetch("http://localhost:3000/comprar",{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+            categoria:"suprema",
+            producto:producto,
+            cantidad:cantidad
+        })
+    });
+
+    const datos = await respuesta.json();
+
+    if(datos.error){
+        alert(datos.error);
+        return;
+    }
+
+    efecto(btn,precio);
+
+    carrito.push({
+        prod,
+        precio
+    });
+
+    localStorage.setItem(
+        "carrito",
+        JSON.stringify(carrito)
+    );
+
+    render();
+}
+
+
+efecto(btn,precio);
+
+
+carrito.push({
+
+prod,
+precio
+
+});
+
+
+localStorage.setItem(
+"carrito",
+JSON.stringify(carrito)
+);
+
+
+render();
+
+revisarBotonesStock();
+
+actualizarStockCliente();
+
+
+
+
+
+
+function render(){
+
+let c =
+document.getElementById("carrito");
+
+c.innerHTML = "";
+
+let total = 0;
+
+carrito.forEach((i,ind)=>{
+
+total += i.precio;
+
+c.innerHTML += `
+
+<li>
+
+${i.prod} $${i.precio}
+
+<button
+class="eliminar"
+onclick="del(${ind})">
+X
+</button>
+
+</li>
+
+`;
+
+});
+
+document.getElementById("total").innerText =
+total;
+
+}
+
+function del(i){
+
+carrito.splice(i,1);
+
+localStorage.setItem(
+"carrito",
+JSON.stringify(carrito)
+);
+
+render();
+
+}
+
+/* ================= WHATSAPP ================= */
+
+async function enviar(){
+
+let nombre =
+document.getElementById("nombre").value;
+
+let dir =
+document.getElementById("direccion").value;
+
+async function verificarDireccion() {
+    return true;
+}
+
+
+let direccionOk = await verificarDireccion();
+
+if(!direccionOk){
+
+return;
+
+}
+
+let zona = dir.toLowerCase();
+
+if(!zona.includes("cañada") && !zona.includes("canada")){
+
+alert("Lo sentimos, solo trabajamos en Cañada de Gómez.");
+
+return;
+
+}
+
+let tel =
+document.getElementById("telefono").value;
+
+if(!tel.startsWith("3471")){
+
+alert("Lo sentimos, no trabajamos fuera de la zona de Cañada de Gómez.");
+
+return;
+
+}
+
+let pago =
+document.getElementById("pago").value;
+
+if(carrito.length == 0){
+
+alert("El carrito está vacío");
+
+return;
+
+}
+
+if(nombre == "" || dir == "" || tel == "" || pago == ""){
+
+alert("Completa todos los datos");
+
+return;
+
+}
+
+let clienteExistente = clientes.find(
+
+c => c.nombre.toLowerCase() ==
+nombre.toLowerCase()
+
+);
+
+if(!clienteExistente){
+
+let nuevoCliente = {
+
+id:
+
+"CL" +
+
+String(clientes.length + 1)
+.padStart(4,"0"),
+
+nombre:nombre,
+
+direccion:dir,
+
+telefono:tel
+
+};
+
+clientes.push(nuevoCliente);
+
+localStorage.setItem(
+"clientes",
+JSON.stringify(clientes)
+);
+
+clienteExistente = nuevoCliente;
+
+}
+
+let total =
+carrito.reduce((a,b)=>a+b.precio,0);
+
+let fechaActual = new Date();
+
+let fecha =
+fechaActual.toLocaleDateString();
+
+let hora =
+fechaActual.toLocaleTimeString();
+
+let pedido = {
+
+id: pedidos.length + 1,
+
+clienteID: clienteExistente.id,
+
+cliente: nombre,
+
+direccion: dir,
+
+telefono: tel,
+
+pago:pago,
+
+productos: carrito,
+
+total: total,
+
+fecha: fecha,
+
+hora: hora
+
+};
+
+pedidos.push(pedido);
+
+localStorage.setItem(
+"pedidos",
+JSON.stringify(pedidos)
+);
+
+let numeroPedido = pedidos.length;
+
+let msg =
+
+"🍕 PEDIDO #"+numeroPedido+"\n\n"+
+
+"🆔 Cliente: "+clienteExistente.id+"\n"+
+
+"👤 Cliente: "+nombre+"\n"+
+
+"📅 Fecha: "+fecha+"\n"+
+
+"⏰ Hora Pedido: "+hora+"\n"+
+
+"📍 Dirección: "+dir+"\n"+
+
+"📞 Teléfono: "+tel+"\n"+
+"💳 Pago: "+pago+"\n\n"+
+
+"🛒 Pedido:\n";
+
+carrito.forEach(i=>{
+
+msg += i.prod+" $"+i.precio+"\n";
+
+});
+
+msg += "\nTOTAL: $"+total;
+
+let url =
+
+"https://wa.me/5493471344720?text=" +
+
+encodeURIComponent(msg);
+
+location.href = url;
+
+carrito = [];
+
+localStorage.removeItem("carrito");
+
+render();
+
+document.getElementById("mensaje").style.display =
+"block";
+
+setTimeout(()=>{
+
+document.getElementById("mensaje").style.display =
+"none";
+
+},2000);
+
+console.log("CLIENTES:", clientes);
+
+console.log("PEDIDOS:", pedidos);
+
+}
+
+/* ================= MODO ================= */
+
+let light = false;
+
+function toggleMode(){
+
+light = !light;
+
+document.body.classList.toggle("light");
+
+}
+
+/* ================= MUTE ================= */
+
+function toggleMute(){
+
+audio.muted = !audio.muted;
+
+}
+
+/* ================= INICIO ================= */
+
+render();
+
+function revisarBotonesStock(){
+
+}
+
+function actualizarStockCliente(stock){
+
+    document.querySelectorAll(".card").forEach(card=>{
+
+        let categoria = card.dataset.categoria;
+        let producto = card.dataset.producto;
+
+        let viejo = card.querySelector(".estado-stock");
+
+        if(viejo){
+            viejo.remove();
+        }
+
+        card.classList.remove("sin-stock");
+
+        let botones = card.querySelectorAll(".comprar");
+
+        botones.forEach(boton=>{
+            boton.disabled = false;
+            boton.innerText = "COMPRAR";
+        });
+
+        if(stock[categoria] && stock[categoria][producto]){
+
+            let cantidad = stock[categoria][producto].stock;
+
+            let estado = "";
+            let clase = "";
+
+            if(cantidad <= 0){
+
+                estado = "⚫ SIN STOCK";
+                clase = "negro";
+
+                card.classList.add("sin-stock");
+
+                botones.forEach(boton=>{
+                    boton.disabled = true;
+                    boton.innerText = "SIN STOCK";
+                });
+
+            }else if(cantidad <= 5){
+
+                estado = "🟡 POCO STOCK";
+                clase = "amarillo";
+
+            }else{
+
+                estado = "🟢 DISPONIBLE";
+                clase = "verde";
+
+            }
+
+            let div = document.createElement("div");
+            div.className = "estado-stock " + clase;
+            div.innerHTML = estado;
+
+            card.querySelector(".info").appendChild(div);
+        }
+
+    });
+
+}
+
+
+
+render();
+revisarBotonesStock();
+actualizarStockCliente();
+
+</script>
+
+<script src="http://localhost:3000/socket.io/socket.io.js"></script>
+
+<script>
+
+// ================= SOCKET.IO STOCK EN TIEMPO REAL =================
+
+const socket = io("http://localhost:3000");
+
+
+socket.on("actualizarStock", (stock) => {
+
+    console.log("Stock recibido del servidor:", stock);
+
+    actualizarStockCliente(stock);
+
+});
+
+</script>
+
+</body>
+</html>
