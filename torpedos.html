@@ -1035,32 +1035,32 @@ JSON.parse(localStorage.getItem("clientes")) || [];
 
 /* ================= CARRITO ================= */
 
-async function agregar(btn, prod, precio, cantidad, producto){
+async function agregar(btn, prod, precio, cantidad, producto) {
 
-    const respuesta = await fetch("http://localhost:3000/comprar",{
-        method:"POST",
-        headers:{
-            "Content-Type":"application/json"
+    const respuesta = await fetch("https://do-a-salsa-1.onrender.com/comprar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
         },
-        body:JSON.stringify({
-            categoria:"torpedos",
-            producto:producto,
-            cantidad:cantidad
+        body: JSON.stringify({
+            categoria: "torpedos",
+            producto: producto,
+            cantidad: cantidad
         })
     });
 
     const datos = await respuesta.json();
 
-    if(datos.error){
+    if (datos.error) {
         alert(datos.error);
         return;
     }
 
-    efecto(btn,precio);
+    efecto(btn, precio);
 
     carrito.push({
-        prod,
-        precio
+        prod: prod,
+        precio: precio
     });
 
     localStorage.setItem(
@@ -1069,36 +1069,9 @@ async function agregar(btn, prod, precio, cantidad, producto){
     );
 
     render();
-
+    revisarBotonesStock();
+    actualizarStockCliente(datos.stock);
 }
-
-
-efecto(btn,precio);
-
-
-carrito.push({
-
-prod,
-precio
-
-});
-
-
-localStorage.setItem(
-"carrito",
-JSON.stringify(carrito)
-);
-
-
-render();
-
-revisarBotonesStock();
-
-actualizarStockCliente();
-
-
-
-
 
 function render(){
 
@@ -1378,72 +1351,69 @@ function revisarBotonesStock(){
 
 }
 
+function actualizarStockCliente(stock){
 
+    document.querySelectorAll(".card").forEach(card=>{
 
-let stock = JSON.parse(localStorage.getItem("stock")) || {};
+        let categoria = card.dataset.categoria;
+        let producto = card.dataset.producto;
 
-document.querySelectorAll(".card").forEach(card=>{
+        let viejo = card.querySelector(".estado-stock");
 
+        if(viejo){
+            viejo.remove();
+        }
 
-let categoria = card.dataset.categoria;
-let producto = card.dataset.producto;
+        card.classList.remove("sin-stock");
 
-let viejo = card.querySelector(".estado-stock");
+        let botones = card.querySelectorAll(".comprar");
 
-if(viejo){
-    viejo.remove();
+        botones.forEach(boton=>{
+            boton.disabled = false;
+            boton.innerText = "COMPRAR";
+        });
+
+        if(stock[categoria] && stock[categoria][producto]){
+
+            let cantidad = stock[categoria][producto].stock;
+
+            let estado = "";
+            let clase = "";
+
+            if(cantidad <= 5){
+
+                estado = "⚫ SIN STOCK";
+                clase = "negro";
+
+                card.classList.add("sin-stock");
+
+                botones.forEach(boton=>{
+                    boton.disabled = true;
+                    boton.innerText = "SIN STOCK";
+                });
+
+            }else if(cantidad <= 6){
+
+                estado = "🟡 MEDIA DOCENA SOLAMENTE";
+                clase = "amarillo";
+
+            }else{
+
+                estado = "🟢 DISPONIBLE";
+                clase = "verde";
+
+            }
+
+            let div = document.createElement("div");
+            div.className = "estado-stock " + clase;
+            div.innerHTML = estado;
+
+            card.querySelector(".info").appendChild(div);
+        }
+
+    });
+
 }
-
-
-if(stock[categoria] && stock[categoria][producto]){
-
-let cantidad = stock[categoria][producto].stock;
-
-let estado="";
-let clase="";
-
-
-if(cantidad <=0){
-
-estado="⚫ SIN STOCK";
-clase="negro";
-card.classList.add("sin-stock");
-
-let botones = card.querySelectorAll(".comprar");
-
-botones.forEach(boton => {
-    boton.remove();
-});
-
-
-}else if(cantidad <=5){
-
-estado="🟡 POCO STOCK";
-clase="amarillo";
-
-}else{
-
-estado="🟢 DISPONIBLE";
-clase="verde";
-
-}
-
-
-let div=document.createElement("div");
-
-div.className="estado-stock "+clase;
-
-div.innerHTML=estado;
-
-
-card.querySelector(".info").appendChild(div);
-
-
-}
-
-});
-
-
 
 
 
@@ -1453,15 +1423,13 @@ actualizarStockCliente();
 
 </script>
 
-</script>
-
-<script src="http://localhost:3000/socket.io/socket.io.js"></script>
+<script src="/socket.io/socket.io.js"></script>
 
 <script>
 
 // ================= SOCKET.IO STOCK EN TIEMPO REAL =================
 
-const socket = io("http://localhost:3000");
+const socket = io("https://do-a-salsa-1.onrender.com");
 
 
 socket.on("actualizarStock", (stock) => {
@@ -1472,103 +1440,7 @@ socket.on("actualizarStock", (stock) => {
 
 });
 
-
-// ================= MOSTRAR STOCK =================
-
-function actualizarStockCliente(stock){
-
-
-    document.querySelectorAll(".card").forEach(card=>{
-
-
-        let categoria = card.dataset.categoria;
-        let producto = card.dataset.producto;
-
-
-        // borrar estado anterior
-
-        let viejo = card.querySelector(".estado-stock");
-
-        if(viejo){
-            viejo.remove();
-        }
-
-
-
-        if(stock[categoria] && stock[categoria][producto]){
-
-
-            let cantidad = stock[categoria][producto].stock;
-
-
-            let estado = "";
-            let clase = "";
-
-
-
-            if(cantidad <= 0){
-
-                estado = "⚫ SIN STOCK";
-                clase = "negro";
-
-
-                let botones = card.querySelectorAll(".comprar");
-
-                botones.forEach(boton=>{
-
-                    boton.disabled = true;
-                    boton.innerText = "SIN STOCK";
-
-                });
-
-
-
-            }else if(cantidad <= 5){
-
-
-                estado = "🟡 POCO STOCK";
-                clase = "amarillo";
-
-
-
-            }else{
-
-
-                estado = "🟢 DISPONIBLE";
-                clase = "verde";
-
-
-            }
-
-
-
-            let div = document.createElement("div");
-
-            div.className = "estado-stock " + clase;
-
-            div.innerHTML = estado;
-
-
-            card.querySelector(".info").appendChild(div);
-
-
-        }
-
-
-    });
-
-
-}
-
 </script>
-
-</body>
-</html>
-
-</body>
-</html>
-
-
 
 </body>
 </html>
