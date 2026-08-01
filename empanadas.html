@@ -1073,7 +1073,7 @@ JSON.parse(localStorage.getItem("clientes")) || [];
 
 async function agregar(btn, prod, precio, cantidad, producto){
 
-    const respuesta = await fetch("http://localhost:3000/comprar",{
+    const respuesta = await fetch("https://do-a-salsa-1.onrender.com",{
         method:"POST",
         headers:{
             "Content-Type":"application/json"
@@ -1486,13 +1486,13 @@ actualizarStockCliente();
 
 </script>
 
-<script src="http://localhost:3000/socket.io/socket.io.js"></script>
+<script src="/socket.io/socket.io.js"></script>
 
 <script>
 
 // ================= SOCKET.IO STOCK EN TIEMPO REAL =================
 
-const socket = io("http://localhost:3000");
+const socket = io("https://do-a-salsa-1.onrender.com");
 
 
 socket.on("actualizarStock", (stock) => {
