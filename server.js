@@ -1,5 +1,4 @@
 const express = require("express");
-app.use(express.static("."));
 const cors = require("cors");
 const http = require("http");
 const { Server } = require("socket.io");
@@ -9,9 +8,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-
-// IMPORTANTE: permite mostrar index.html, imágenes, css, js, etc.
-
+app.use(express.static("."));
 
 // ================= STOCK =================
 
