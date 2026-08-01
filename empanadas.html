@@ -1071,32 +1071,32 @@ JSON.parse(localStorage.getItem("clientes")) || [];
 
 /* ================= CARRITO ================= */
 
-async function agregar(btn, prod, precio, cantidad, producto){
+async function agregar(btn, prod, precio, cantidad, producto) {
 
-    const respuesta = await fetch("https://do-a-salsa-1.onrender.com",{
-        method:"POST",
-        headers:{
-            "Content-Type":"application/json"
+    const respuesta = await fetch("https://do-a-salsa-1.onrender.com/comprar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
         },
-        body:JSON.stringify({
-            categoria:"empanadas",
-            producto:producto,
-            cantidad:cantidad
+        body: JSON.stringify({
+            categoria: "empanadas",
+            producto: producto,
+            cantidad: cantidad
         })
     });
 
     const datos = await respuesta.json();
 
-    if(datos.error){
+    if (datos.error) {
         alert(datos.error);
         return;
     }
 
-    efecto(btn,precio);
+    efecto(btn, precio);
 
     carrito.push({
-        prod,
-        precio
+        prod: prod,
+        precio: precio
     });
 
     localStorage.setItem(
@@ -1105,36 +1105,9 @@ async function agregar(btn, prod, precio, cantidad, producto){
     );
 
     render();
+    revisarBotonesStock();
+    actualizarStockCliente(datos.stock);
 }
-
-
-efecto(btn,precio);
-
-
-carrito.push({
-
-prod,
-precio
-
-});
-
-
-localStorage.setItem(
-"carrito",
-JSON.stringify(carrito)
-);
-
-
-render();
-
-revisarBotonesStock();
-
-actualizarStockCliente();
-
-
-
-
-
 
 function render(){
 
