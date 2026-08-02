@@ -1124,7 +1124,7 @@ async function del(i){
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            categoria: "pizzas",
+            categoria:item.categoria,
             producto: item.producto,
             cantidad: item.cantidad
         })

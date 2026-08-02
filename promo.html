@@ -1122,17 +1122,18 @@ async function agregar(btn, prod, precio, cantidad, producto) {
     efecto(btn, precio);
 
     carrito.push({
-        prod: prod,
-        precio: precio
-    });
-
+    prod: prod,
+    precio: precio,
+    producto: producto,
+    cantidad: cantidad,
+    categoria: "promo"
+});
     localStorage.setItem(
         "carrito",
         JSON.stringify(carrito)
     );
 
     render();
-    revisarBotonesStock();
     actualizarStockCliente(datos.stock);
 }
 
@@ -1182,13 +1183,15 @@ async function del(i){
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            categoria: "empanadas",
+            categoria:item.categoria,
             producto: item.producto,
             cantidad: item.cantidad
         })
     });
 
     const datos = await respuesta.json();
+
+    console.log("Respuesta devolver stock:", datos);
 
     carrito.splice(i,1);
 
@@ -1433,6 +1436,11 @@ function revisarBotonesStock(){
 
 function actualizarStockCliente(stock){
 
+    if(!stock){
+    console.log("No llegó stock");
+    return;
+}
+
     document.querySelectorAll(".card").forEach(card=>{
 
         let categoria = card.dataset.categoria;
@@ -1472,7 +1480,7 @@ function actualizarStockCliente(stock){
                     boton.innerText = "SIN STOCK";
                 });
 
-            }else if(cantidad <= 5){
+            }else if(cantidad <= 7){
 
                 estado = "🟡 POCO STOCK";
                 clase = "amarillo";
@@ -1499,7 +1507,6 @@ function actualizarStockCliente(stock){
 
 render();
 revisarBotonesStock();
-actualizarStockCliente();
 
 </script>
 
@@ -1510,6 +1517,12 @@ actualizarStockCliente();
 // ================= SOCKET.IO STOCK EN TIEMPO REAL =================
 
 const socket = io("https://do-a-salsa-1.onrender.com");
+
+socket.on("connect",()=>{
+
+    console.log("Socket conectado:", socket.id);
+
+});
 
 
 socket.on("actualizarStock", (stock) => {
@@ -1524,4 +1537,3 @@ socket.on("actualizarStock", (stock) => {
 
 </body>
 </html>
-
