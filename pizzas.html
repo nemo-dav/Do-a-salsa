@@ -1373,6 +1373,11 @@ function revisarBotonesStock(){
 
 function actualizarStockCliente(stock){
 
+    if(!stock){
+    console.log("No llegó stock");
+    return;
+}
+
     document.querySelectorAll(".card").forEach(card=>{
 
         let categoria = card.dataset.categoria;
@@ -1438,7 +1443,7 @@ function actualizarStockCliente(stock){
 
 
 render();
-actualizarStockCliente();
+revisarBotonesStock();
 
 </script>
 
