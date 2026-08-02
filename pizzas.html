@@ -1132,6 +1132,8 @@ async function del(i){
 
     const datos = await respuesta.json();
 
+    console.log("Respuesta devolver stock:", datos);
+
     carrito.splice(i,1);
 
     localStorage.setItem(
