@@ -1455,6 +1455,12 @@ revisarBotonesStock();
 
 const socket = io("https://do-a-salsa-1.onrender.com");
 
+socket.on("connect",()=>{
+
+    console.log("Socket conectado:", socket.id);
+
+});
+
 
 socket.on("actualizarStock", (stock) => {
 
