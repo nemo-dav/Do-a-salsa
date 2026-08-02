@@ -1063,10 +1063,12 @@ async function agregar(btn, prod, precio, cantidad, producto) {
     efecto(btn, precio);
 
     carrito.push({
-        prod: prod,
-        precio: precio
-    });
-
+    prod: prod,
+    precio: precio,
+    producto: producto,
+    cantidad: cantidad,
+    categoria: "pizzas"
+});
     localStorage.setItem(
         "carrito",
         JSON.stringify(carrito)
