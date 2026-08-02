@@ -129,7 +129,35 @@ app.post("/comprar",(req,res)=>{
     });
 
 });
+{
 
+ app.post("/devolver-stock", (req, res) => {
+
+    const {
+        categoria,
+        producto,
+        cantidad
+    } = req.body;
+
+    if (!stock[categoria] || !stock[categoria][producto]) {
+        return res.json({
+            error: "Producto no existe"
+        });
+    }
+
+    stock[categoria][producto].stock += Number(cantidad);
+
+    io.emit("actualizarStock", stock);
+
+    res.json({
+        mensaje: "Stock devuelto",
+        stock
+    });
+
+});   
+
+
+}
 
 
 app.post("/actualizar-stock",(req,res)=>{

@@ -1113,17 +1113,34 @@ total;
 
 }
 
-function del(i){
+async function del(i){
 
-carrito.splice(i,1);
+    let item = carrito[i];
 
-localStorage.setItem(
-"carrito",
-JSON.stringify(carrito)
-);
+    const respuesta = await fetch("https://do-a-salsa-1.onrender.com/devolver-stock", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            categoria: "empanadas",
+            producto: item.producto,
+            cantidad: item.cantidad
+        })
+    });
 
-render();
+    const datos = await respuesta.json();
 
+    carrito.splice(i,1);
+
+    localStorage.setItem(
+        "carrito",
+        JSON.stringify(carrito)
+    );
+
+    render();
+
+    actualizarStockCliente(datos.stock);
 }
 
 /* ================= WHATSAPP ================= */
